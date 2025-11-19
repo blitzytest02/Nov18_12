@@ -1,7 +1,7 @@
 {
   "name": "nodejs-express-tutorial",
   "version": "1.0.0",
-  "description": "A tutorial Node.js server with Express.js framework demonstrating basic API endpoints",
+  "description": "Tutorial project demonstrating Express.js integration with Node.js server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
