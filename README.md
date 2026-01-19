@@ -1,17 +1,20 @@
-# Node.js Express Tutorial Server
+# Python Flask Tutorial Server
 
-A simple tutorial project demonstrating how to build a Node.js server using the Express.js web framework with multiple API endpoints.
+A simple tutorial project demonstrating how to build a Python server using the Flask web framework with multiple API endpoints.
 
 ## Description
 
-This project shows how to integrate Express.js into a Node.js application and create basic REST API endpoints. It's designed as an educational resource for learning Express.js fundamentals.
+This project shows how to integrate Flask into a Python application and create basic REST API endpoints. It's designed as an educational resource for learning Flask fundamentals.
+
+This project was migrated from a Node.js/Express implementation to Python/Flask while preserving all original functionalities.
 
 ## Features
 
-- **Express.js Integration**: Modern web framework for Node.js
+- **Flask Integration**: Modern web framework for Python
 - **Multiple Endpoints**: Demonstrates routing with two different endpoints
 - **Simple Architecture**: Clean, beginner-friendly code structure
 - **Environment Configuration**: Configurable port via environment variables
+- **Error Handling**: Custom 404 and 500 error handlers
 
 ## API Endpoints
 
@@ -31,13 +34,13 @@ This project shows how to integrate Express.js into a Node.js application and cr
 
 Before running this project, ensure you have the following installed:
 
-- **Node.js** (v18.x or higher recommended)
-- **npm** (v6.x or higher)
+- **Python** (3.12 or higher recommended)
+- **pip** (Python package manager, included with Python)
 
-You can verify your installations by running:
+You can verify your installation by running:
 ```bash
-node --version
-npm --version
+python --version
+pip --version
 ```
 
 ## Installation
@@ -49,38 +52,65 @@ npm --version
 cd nodejs-express-tutorial
 ```
 
-3. Install dependencies:
+3. Create a virtual environment:
 ```bash
-npm install
+python -m venv .venv
 ```
 
-This will install Express.js and all required packages.
+4. Activate the virtual environment:
+
+**On macOS/Linux:**
+```bash
+source .venv/bin/activate
+```
+
+**On Windows Command Prompt:**
+```bash
+.venv\Scripts\activate
+```
+
+**On Windows PowerShell:**
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+5. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+This will install Flask and all required packages.
 
 ## Usage
 
 ### Starting the Server
 
-To start the server in production mode:
+To start the server:
 ```bash
-npm start
+python app.py
+```
+
+Or using Flask's built-in CLI:
+```bash
+flask run --port 3000
 ```
 
 The server will start on port 3000 by default. You should see output like:
 ```
 Server is running on http://localhost:3000
 Try these endpoints:
-  - http://localhost:3000/ (Hello world)
-  - http://localhost:3000/evening (Good evening)
+  - http://localhost:3000/ (returns "Hello world")
+  - http://localhost:3000/evening (returns "Good evening")
 ```
 
 ### Development Mode
 
 For development with auto-restart on file changes:
 ```bash
-npm run dev
+flask run --debug --port 3000
 ```
 
-This uses nodemon to automatically restart the server when you modify the code.
+This enables Flask's debug mode which automatically restarts the server when you modify the code.
 
 ### Testing the Endpoints
 
@@ -109,31 +139,30 @@ You can customize the port by setting the `PORT` environment variable:
 
 ```bash
 # Linux/macOS
-PORT=8080 npm start
+PORT=8080 python app.py
 
 # Windows Command Prompt
-set PORT=8080 && npm start
+set PORT=8080 && python app.py
 
 # Windows PowerShell
-$env:PORT=8080; npm start
+$env:PORT=8080; python app.py
 ```
 
 ## Project Structure
 
 ```
 nodejs-express-tutorial/
-├── server.js           # Main application file
-├── package.json        # Project metadata and dependencies
-├── package-lock.json   # Locked dependency versions
-├── .gitignore         # Git ignore rules
-├── .nvmrc             # Node.js version specification
-└── README.md          # This file
+├── app.py              # Main Flask application file
+├── requirements.txt    # Python dependencies
+├── .python-version     # Python version specification
+├── .gitignore          # Git ignore rules
+├── .venv/              # Virtual environment (created after setup)
+└── README.md           # This file
 ```
 
 ## Dependencies
 
-- **express** (^4.19.2): Fast, unopinionated, minimalist web framework for Node.js
-- **nodemon** (^3.0.1): Development tool for auto-restarting the server (dev dependency)
+- **Flask** (>=3.1.0): Lightweight WSGI web application framework for Python
 
 ## License
 
@@ -141,20 +170,49 @@ MIT
 
 ## Learning Resources
 
-To learn more about Express.js:
-- [Express.js Official Documentation](https://expressjs.com/)
-- [Express.js Getting Started Guide](https://expressjs.com/en/starter/installing.html)
-- [Node.js Official Documentation](https://nodejs.org/docs/)
+To learn more about Flask:
+- [Flask Official Documentation](https://flask.palletsprojects.com/)
+- [Flask Quickstart Guide](https://flask.palletsprojects.com/en/latest/quickstart/)
+- [Python Official Documentation](https://docs.python.org/)
 
 ## Troubleshooting
 
 **Port already in use:**
-If you see an error like "EADDRINUSE", the port is already in use. Either:
+If you see an error like "Address already in use", the port is already in use. Either:
 - Stop the other process using that port
-- Use a different port: `PORT=3001 npm start`
+- Use a different port: `PORT=3001 python app.py`
 
 **Module not found:**
-If you see "Cannot find module 'express'", make sure you ran `npm install` first.
+If you see "ModuleNotFoundError: No module named 'flask'", make sure you:
+1. Activated your virtual environment: `source .venv/bin/activate`
+2. Installed dependencies: `pip install -r requirements.txt`
 
-**Node version issues:**
-This project requires Node.js 18.x or higher. Check your version with `node --version`.
+**Python version issues:**
+This project requires Python 3.12 or higher. Check your version with `python --version`.
+
+**Virtual environment not found:**
+If the `.venv` folder doesn't exist, create it with:
+```bash
+python -m venv .venv
+```
+
+## Migration Notes
+
+This project was migrated from Node.js/Express to Python/Flask. The following changes were made:
+
+| Original (Node.js) | New (Python) |
+|-------------------|--------------|
+| `server.js` | `app.py` |
+| `package.json` | `requirements.txt` |
+| `package-lock.json` | (not needed) |
+| `.nvmrc` | `.python-version` |
+| `node_modules/` | `.venv/` |
+| `npm install` | `pip install -r requirements.txt` |
+| `npm start` | `python app.py` |
+| `npm run dev` | `flask run --debug` |
+
+The API endpoints and responses remain exactly the same:
+- GET `/` → "Hello world"
+- GET `/evening` → "Good evening"
+- 404 errors → "Not Found"
+- 500 errors → "Something went wrong!"
